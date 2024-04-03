@@ -1,0 +1,21 @@
+
+local function onWaveComplete(event)
+    if event:GetName() == "mvm_begin_wave" then
+        if event:GetInt("wave_index") == 0 then
+            client.ChatSay("[AUTO] Hi guys! I hope we'll last all of the "..event:GetInt("max_waves").." waves!")
+        elseif event:GetInt("wave_index") +1 == event:GetInt("max_waves") then
+            client.ChatSay("[AUTO] Want to play again? Discord/Github '1ziko' or add me on Steam.")
+            client.ChatSay("[AUTO] All of my luas are avaible on my github.")
+        else 
+            client.ChatSay("[AUTO] Only ".. event:GetInt("max_waves")-event:GetInt("wave_index") .." left!")
+        end 
+    elseif event:GetName() == "mvm_wave_failed" then
+        client.ChatSay("[AUTO] Sorry I was probably AFK :c")
+    elseif event:GetName() == "party_member_leave" then
+        client.ChatSay("[AUTO] Please don't leave, we'll still win!")
+    end
+
+end
+
+callbacks.Unregister("FireGameEvent", "AutoAdv", onWaveComplete)
+callbacks.Register("FireGameEvent", "AutoAdv", onWaveComplete)
