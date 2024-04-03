@@ -1,0 +1,10 @@
+local function onSpySpawn(event) 
+    if event:GetName() == "player_spawn" and event:GetInt("class") == 8 and event:GetInt("team") == 3  then 
+        playerlist.SetPriority(event:GetInt("userid"), 1)
+    elseif event:GetName() == "player_spawn" then
+        print(event:GetInt("class"), event:GetInt("team"), event:GetInt("userid"),"...")
+        playerlist.SetPriority(event:GetInt("userid"), 0)
+    end
+end
+callbacks.Unregister("FireGameEvent", "SpyMark", onSpySpawn)
+callbacks.Register("FireGameEvent", "SpyMark", onSpySpawn)
